@@ -6,7 +6,7 @@
 /*   By: lguerbig <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 16:58:45 by lguerbig          #+#    #+#             */
-/*   Updated: 2024/11/15 18:57:42 by lguerbig         ###   ########.fr       */
+/*   Updated: 2024/11/16 12:03:54 by lguerbig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ typedef struct s_map
 	char	type;
 	char	watch;
 	char	block_on;
+	//char	frame;
 }				t_map;
 
 typedef struct s_textures
@@ -109,11 +110,10 @@ void	check_img_init(t_mlx_data *data);
 char	**read_tab(int fd);
 char	**create_tab_map(char *filename);
 int		set_map(t_mlx_data *data, char **map);
-void	create_map(t_mlx_data *data, char *filname);
+void	create_map(t_mlx_data *data, char *filename);
 void	set_pos_img(t_mlx_data *data);
 
 /*---change_map.c---*/
-void	set_orientation(t_map *bloc, int move);
 void	set_new_position(t_mlx_data *data, int move_x, int move_y);
 void	move_hero(t_mlx_data *data, int move_x, int move_y);
 
@@ -127,7 +127,7 @@ int		close_game_error(t_mlx_data *data);
 int		close_game_ok(t_mlx_data *data);
 void	free_tab(char **tab);
 void	free_map(t_map **tab);
-void	clear_img(t_mlx_data *data, void **img);
+void	clear_anim(t_mlx_data *data, void **img);
 void	clear_data(t_mlx_data *data);
 
 #endif

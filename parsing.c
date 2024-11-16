@@ -6,7 +6,7 @@
 /*   By: lguerbig <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 16:22:50 by lguerbig          #+#    #+#             */
-/*   Updated: 2024/11/15 15:44:15 by lguerbig         ###   ########.fr       */
+/*   Updated: 2024/11/16 11:20:06 by lguerbig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +108,8 @@ int	parsing(char **map)
 	int	i;
 	int	j;
 
+	if (!map)
+		return (0);
 	find_player(map, &i, &j);
 	if (!map_is_rectangular(map))
 		ft_printf(2, "Error\nThe map must be rectangular\n");

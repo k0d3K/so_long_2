@@ -6,7 +6,7 @@
 /*   By: lguerbig <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 11:58:19 by lguerbig          #+#    #+#             */
-/*   Updated: 2024/11/15 20:22:38 by lguerbig         ###   ########.fr       */
+/*   Updated: 2024/11/16 12:00:47 by lguerbig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int	print_map(t_mlx_data *data)
 {
 	int	x_count;
 	int	y_count;
-
+	
 	y_count = 0;
 	while (data->map[y_count])
 	{

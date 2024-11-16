@@ -6,19 +6,11 @@
 /*   By: lguerbig <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 16:02:57 by lguerbig          #+#    #+#             */
-/*   Updated: 2024/11/15 20:40:28 by lguerbig         ###   ########.fr       */
+/*   Updated: 2024/11/16 12:00:00 by lguerbig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-
-void	set_orientation(t_map *bloc, int move)
-{
-	if (move > 0)
-		bloc->watch = 'R';
-	else if (move < 0)
-		bloc->watch = 'L';
-}
 
 void	set_new_position(t_mlx_data *data, int move_x, int move_y)
 {
@@ -50,15 +42,30 @@ void	move_hero(t_mlx_data *data, int move_x, int move_y)
 	old_bloc = &data->map[data->y_pos][data->x_pos];
 	set_new_position(data, move_x, move_y);
 	new_bloc = &data->map[data->y_pos][data->x_pos];
+	if (new_bloc == old_bloc)
+		return ;
+	if (new_bloc->type == 'M')
+	{
+		ft_printf(1, "Game Over !\n");
+		close_game_ok(data);
+	}
 	if (new_bloc->type == 'E'
 		&& all_collected(data->map, 'C'))
+	{
+		ft_printf(1, "Succes !\n");
 		close_game_ok(data);
+	}
 	new_bloc->block_on = new_bloc->type;
 	if (new_bloc->type == 'C')
 		new_bloc->block_on = '0';
 	new_bloc->type = old_bloc->type;
 	old_bloc->type = old_bloc->block_on;
-	set_orientation(new_bloc, move_x);
+	if (move_x > 0)
+		new_bloc->watch = 'R';
+	else if (move_x < 0)
+		new_bloc->watch = 'L';
+	else
+		new_bloc->watch = old_bloc->watch;
 	data->score++;
 	ft_printf(1, "%d\n", data->score);
 }

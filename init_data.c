@@ -6,7 +6,7 @@
 /*   By: lguerbig <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 22:44:23 by lguerbig          #+#    #+#             */
-/*   Updated: 2024/11/15 19:42:34 by lguerbig         ###   ########.fr       */
+/*   Updated: 2024/11/16 10:57:40 by lguerbig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,9 +62,7 @@ void	init_potion(t_mlx_data *data)
 void	init_map(t_mlx_data *data)
 {
 	void	*p;
-	t_textures	img;
 
-	img = data->img;
 	p = data->mlx_ptr;
 	data->img.floor_img = create_img(data, p, "textures/floor.xpm");
 	data->img.wall_img = create_img(data, p, "textures/wall.xpm");

@@ -6,7 +6,7 @@
 /*   By: lguerbig <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 15:50:44 by lguerbig          #+#    #+#             */
-/*   Updated: 2024/11/15 18:56:57 by lguerbig         ###   ########.fr       */
+/*   Updated: 2024/11/16 10:37:18 by lguerbig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	free_map(t_map **tab)
 	free(tab);
 }
 
-void	clear_img(t_mlx_data *data, void **img)
+void	clear_anim(t_mlx_data *data, void **img)
 {
 	int	i;
 
@@ -63,14 +63,13 @@ void	clear_data(t_mlx_data *data)
 		return ;
 	else
 		free_map(data->map);
-	clear_img(data, data->img.hero_img);
-	clear_img(data, data->img.enemy_img);
-	clear_img(data, data->img.potion_img);
-	clear_img(data, data->img.floor_img);
-	clear_img(data, data->img.wall_img);
-	clear_img(data, data->img.exit_img);
+	clear_anim(data, data->img.hero_img);
+	clear_anim(data, data->img.enemy_img);
+	clear_anim(data, data->img.potion_img);
+	mlx_destroy_image(data->mlx_ptr, data->img.floor_img);
+	mlx_destroy_image(data->mlx_ptr, data->img.wall_img);
+	mlx_destroy_image(data->mlx_ptr, data->img.exit_img);
 	mlx_destroy_window(data->mlx_ptr, data->mlx_win);
 	mlx_destroy_display(data->mlx_ptr);
-	free(data->map);
 	free(data->mlx_ptr);
 }

@@ -6,7 +6,7 @@
 /*   By: lguerbig <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 10:56:39 by lguerbig          #+#    #+#             */
-/*   Updated: 2024/11/15 19:43:17 by lguerbig         ###   ########.fr       */
+/*   Updated: 2024/11/16 11:59:11 by lguerbig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,20 @@ char	**read_tab(int fd)
 	{
 		tab = tab_join_free(tab, line);
 		if (!tab)
+		{
+			free(line);
 			return (NULL);
+		}
 		line = get_next_line(fd);
 	}
 	if (tab)
 	{
 		tab = tab_join_free(tab, line);
 		if (!tab)
+		{
+			free(line);
 			return (NULL);
+		}
 	}
 	return (tab);
 }
@@ -52,8 +58,6 @@ char	**create_tab_map(char *filename)
 		return (NULL);
 	close(fd);
 	map_cpy = tab_cpy(map);
-	if (!map_cpy)
-		return (NULL);
 	if (!parsing(map_cpy))
 	{
 		free_tab(map);
@@ -69,10 +73,6 @@ int	set_map(t_mlx_data *data, char **map)
 	int	i;
 	int	j;
 
-	data->map_width = ft_strlen(map[0]);
-	data->map_height = 0;
-	while (map[data->map_height])
-		data->map_height++;
 	data->map = (t_map **)malloc(sizeof(t_map*) * (data->map_height + 1));
 	if (!data->map)
 		return (0);
@@ -82,10 +82,7 @@ int	set_map(t_mlx_data *data, char **map)
 		i = 0;
 		data->map[j] = (t_map *)malloc(sizeof(t_map) * (data->map_width + 1));
 		if (!data->map[j])
-		{
-			free_map(data->map);
 			return (0);
-		}
 		while (map[j][i] && map[j][i] != '\n')
 		{
 			data->map[j][i].type = map[j][i];
@@ -98,18 +95,23 @@ int	set_map(t_mlx_data *data, char **map)
 	return (1);
 }
 
-void	create_map(t_mlx_data *data, char *filname)
+void	create_map(t_mlx_data *data, char *filename)
 {
-	char	**tmp_map;
+	char	**map;
 
-	tmp_map = create_tab_map(filname);
-	if (!tmp_map)
+	map = create_tab_map(filename);
+	if (!map)
 		close_game_error(data);
-	if (!set_map(data, tmp_map))
+	data->map_width = ft_strlen(map[0]);
+	data->map_height = 0;
+	while (map[data->map_height])
+		data->map_height++;
+	if (!set_map(data, map))
 	{
-		free_tab(tmp_map);
+		free_tab(map);
 		close_game_error(data);
 	}
+	free_tab(map);
 	data->img_width = 50;
 	data->img_height = 50;
 	if (data->map_width > 38 || data->map_height > 21)
@@ -131,18 +133,15 @@ void	set_pos_img(t_mlx_data *data)
 		x_count = 0;
 		while (data->map[y_count][x_count].type)
 		{
+			data->map[y_count][x_count].block_on = '0';
+			data->map[y_count][x_count].watch = 'L';
 			if (data->map[y_count][x_count].type == 'P')
 			{
 				data->x_pos = x_count;
-				data->y_begin = y_count;
-				data->map[y_count][x_count].block_on = '0';
-				data->map[y_count][x_count].watch = 'L';
+				data->y_pos = y_count;
 			}
 			if (data->map[y_count][x_count].type == 'M')
-			{
-				data->map[y_count][x_count].block_on = '0';
 				data->map[y_count][x_count].watch = 'R';
-			}
 			x_count++;
 		}
 		y_count++;
