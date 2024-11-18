@@ -6,7 +6,7 @@
 /*   By: lguerbig <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 16:58:45 by lguerbig          #+#    #+#             */
-/*   Updated: 2024/11/18 12:49:19 by lguerbig         ###   ########.fr       */
+/*   Updated: 2024/11/18 17:38:13 by lguerbig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include "libft/evo_libft.h"
 
 # include <X11/keysym.h>
+# include <X11/X.h>
 # include <stdlib.h>
 # include <fcntl.h>
 
@@ -56,6 +57,7 @@ typedef struct s_mlx_data
 	int			map_height;
 	int			x_pos;
 	int			y_pos;
+	int			dash_on;
 	t_map		**map;
 	t_textures	img;
 	int			seed;
@@ -100,7 +102,8 @@ void	create_map(t_mlx_data *data, char *filename);
 
 /*---change_map.c---*/
 void	set_move(t_mlx_data *data, t_map *old_bloc, int *move_x, int *move_y);
-
+void	move_hero(t_mlx_data *data, t_map *new_bloc);
+int		move_monster(t_mlx_data *data, t_map *new_bloc);
 void	move(t_mlx_data *data, t_map *old_bloc, int move_x, int move_y);
 
 /*---print_map---*/
@@ -117,8 +120,7 @@ void	update_monster_position(t_mlx_data *data);
 /*---cleanning.c---*/
 int		close_game_error(t_mlx_data *data);
 int		close_game_ok(t_mlx_data *data);
-void	free_tab(char **tab);
-void	free_map(t_map **tab);
+void	free_tab(void **tab);
 void	clear_anim(t_mlx_data *data, void **img);
 void	clear_data(t_mlx_data *data);
 

@@ -6,7 +6,7 @@
 /*   By: lguerbig <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 16:26:21 by lguerbig          #+#    #+#             */
-/*   Updated: 2024/11/18 10:44:18 by lguerbig         ###   ########.fr       */
+/*   Updated: 2024/11/18 17:10:26 by lguerbig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ char	**tab_join_free(char **tab, char *line)
 	}
 	if (!res)
 	{
-		free_tab(tab);
+		free_tab((void **)tab);
 		return (NULL);
 	}
 	while (tab && tab[i])

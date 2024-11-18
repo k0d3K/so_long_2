@@ -6,7 +6,7 @@
 /*   By: lguerbig <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 10:56:39 by lguerbig          #+#    #+#             */
-/*   Updated: 2024/11/18 10:25:45 by lguerbig         ###   ########.fr       */
+/*   Updated: 2024/11/18 17:45:00 by lguerbig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,13 +60,13 @@ char	**create_tab_map(char *filename)
 	map_cpy = tab_cpy(map);
 	if (!parsing(map_cpy))
 	{
-		free_tab(map);
-		free_tab(map_cpy);
+		free_tab((void **)map);
+		free_tab((void **)map_cpy);
 		exit(-1);
 	}
-	free_tab(map_cpy);
+	free_tab((void **)map_cpy);
 	map_cpy = tab_cpy(map);
-	free_tab(map);
+	free_tab((void **)map);
 	return (map_cpy);
 }
 
@@ -127,15 +127,15 @@ void	create_map(t_mlx_data *data, char *filename)
 		data->map_height++;
 	if (!set_map(data, map))
 	{
-		free_tab(map);
+		free_tab((void **)map);
 		close_game_error(data);
 	}
-	free_tab(map);
+	free_tab((void **)map);
 	data->img_width = 50;
 	data->img_height = 50;
 	if (data->map_width > 38 || data->map_height > 21)
 	{
-		free_map(data->map);
+		free_tab((void **)data->map);
 		ft_printf(2, "Error\nThe map is too big to be print on this screen\n");
 		exit(-1);
 	}

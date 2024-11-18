@@ -6,7 +6,7 @@
 /*   By: lguerbig <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 15:50:44 by lguerbig          #+#    #+#             */
-/*   Updated: 2024/11/18 09:41:18 by lguerbig         ###   ########.fr       */
+/*   Updated: 2024/11/18 15:44:10 by lguerbig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	close_game_ok(t_mlx_data *data)
 	exit(0);
 }
 
-void	free_tab(char **tab)
+void	free_tab(void **tab)
 {
 	int	i;
 
@@ -62,7 +62,7 @@ void	clear_data(t_mlx_data *data)
 	if (!data->map)
 		return ;
 	else
-		free_map(data->map);
+		free_tab((void **)data->map);
 	clear_anim(data, data->img.hero_img);
 	clear_anim(data, data->img.enemy_img);
 	clear_anim(data, data->img.potion_img);

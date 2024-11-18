@@ -6,7 +6,7 @@
 /*   By: lguerbig <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 11:58:19 by lguerbig          #+#    #+#             */
-/*   Updated: 2024/11/18 12:24:56 by lguerbig         ###   ########.fr       */
+/*   Updated: 2024/11/18 17:29:19 by lguerbig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,11 @@ void	print_anim(t_mlx_data *data, int x_count, int y_count, void **anim)
 	int		y;
 	void	*img;
 	int		*frame;
+	int		tmp_frame;
 
 	frame = &data->map[y_count][x_count].frame;
-	*frame += ((data->state * data->map_width * (data->map_width + data->map_height) - 20000 * *frame) / 20000) % 2;
+	tmp_frame = (data->state * (data->map_width + data->map_height));
+	*frame += (tmp_frame * data->map_width - 100000 * *frame) / 100000 % 2;
 	*frame %= 4;
 	x = (data->x_begin + x_count) * data->img_width;
 	y = (data->y_begin + y_count) * data->img_height;
@@ -100,6 +102,5 @@ int	print_map(t_mlx_data *data)
 		y_count++;
 	}
 	data->state++;
-	data->state %= 1000;
 	return (1);
 }

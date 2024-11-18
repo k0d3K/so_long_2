@@ -6,7 +6,7 @@
 /*   By: lguerbig <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 11:22:14 by lguerbig          #+#    #+#             */
-/*   Updated: 2024/11/18 12:42:22 by lguerbig         ###   ########.fr       */
+/*   Updated: 2024/11/18 17:37:28 by lguerbig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,20 +22,13 @@ int generate_move(int *seed)
 
 void	ia_monster(t_mlx_data *data, t_map *bloc, int *x_move, int *y_move)
 {
-	static int	slow;
-
-	*y_move = 0;
-	*x_move = 0;
-	if (bloc->frame == 0)
-		slow++;
-	if (slow == 30)
+	if (data->state % 200 == 0)
 	{
 		*x_move = generate_move(&data->seed);
 		*y_move = generate_move(&data->seed);
 		if (*x_move != 0)
 			*y_move = 0;
 		move(data, bloc, *x_move, *y_move);
-		slow = 0;
 	}
 }
 
@@ -46,6 +39,8 @@ void	ia_monster(t_mlx_data *data, t_map *bloc, int *x_move, int *y_move)
 	int	x_move;
 	int	y_move;
 
+	x_move = 0;
+	y_move = 0;
 	y_count = 0;
 	x_count = 0;
 	while (data->map[y_count])
@@ -54,7 +49,13 @@ void	ia_monster(t_mlx_data *data, t_map *bloc, int *x_move, int *y_move)
 		while (data->map[y_count][x_count].type)
 		{
 			if (data->map[y_count][x_count].type == 'M')
+			{
 				ia_monster(data, &data->map[y_count][x_count], &x_move, &y_move);
+				if (x_move > 0)
+					x_count += x_move;
+				else if (y_move > 0)
+					y_count += y_move;
+			}
 			x_count++;
 		}
 		y_count++;

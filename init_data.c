@@ -6,7 +6,7 @@
 /*   By: lguerbig <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 22:44:23 by lguerbig          #+#    #+#             */
-/*   Updated: 2024/11/18 14:13:45 by lguerbig         ###   ########.fr       */
+/*   Updated: 2024/11/18 17:44:53 by lguerbig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,4 +96,5 @@ void	init_data(t_mlx_data *data)
 	data->seed = 1;
 	data->state = 0;
 	data->score = 0;
+	data->dash_on = 0;
 }

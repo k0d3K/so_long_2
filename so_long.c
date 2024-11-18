@@ -6,24 +6,39 @@
 /*   By: lguerbig <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 16:22:38 by lguerbig          #+#    #+#             */
-/*   Updated: 2024/11/18 10:41:35 by lguerbig         ###   ########.fr       */
+/*   Updated: 2024/11/18 17:43:21 by lguerbig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
+int	reset_dash(int keysym, t_mlx_data *data)
+{
+	if (keysym == XK_Shift_L)
+		data->dash_on = 0;
+	return (1);
+}
+
 int	handle_input(int keysym, t_mlx_data *data)
 {
+	int nb_move;
+	
+	if (keysym == XK_Shift_L)
+		data->dash_on = 1;
+	if (data->dash_on)
+		nb_move = 4;
+	else
+		nb_move = 1;
 	if (keysym == XK_Escape)
 		close_game_ok(data);
 	if (keysym == XK_Right || keysym == XK_d)
-		move(data, &data->map[data->y_pos][data->x_pos], 1, 0);
+		move(data, &data->map[data->y_pos][data->x_pos], nb_move, 0);
 	if (keysym == XK_Left || keysym == XK_a)
-		move(data, &data->map[data->y_pos][data->x_pos], -1, 0);
+		move(data, &data->map[data->y_pos][data->x_pos], -nb_move, 0);
 	if (keysym == XK_Up || keysym == XK_w)
-		move(data, &data->map[data->y_pos][data->x_pos], 0, -1);
+		move(data, &data->map[data->y_pos][data->x_pos], 0, -nb_move);
 	if (keysym == XK_Down || keysym == XK_s)
-		move(data, &data->map[data->y_pos][data->x_pos], 0, 1);
+		move(data, &data->map[data->y_pos][data->x_pos], 0, nb_move);
 	return (1);
 }
 
@@ -62,8 +77,9 @@ int	main(int argc, char **argv)
 		close_game_error(&data);
 	init_data(&data);
 	check_img_init(&data);
-	mlx_key_hook(data.mlx_win, handle_input, &data);
-	mlx_hook(data.mlx_win, 17, 1L << 1, close_game_ok, &data);
+	mlx_hook(data.mlx_win, KeyPress , KeyPressMask, handle_input, &data);
+	mlx_hook(data.mlx_win, KeyRelease , KeyRelease, reset_dash, &data);
+	mlx_hook(data.mlx_win, DestroyNotify, KeyPressMask, close_game_ok, &data);
 	mlx_loop_hook(data.mlx_ptr, print_map, &data);
 	mlx_loop(data.mlx_ptr);
 }
