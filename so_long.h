@@ -6,7 +6,7 @@
 /*   By: lguerbig <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 16:58:45 by lguerbig          #+#    #+#             */
-/*   Updated: 2024/11/16 12:03:54 by lguerbig         ###   ########.fr       */
+/*   Updated: 2024/11/18 10:55:28 by lguerbig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,32 +20,14 @@
 # include <stdlib.h>
 # include <fcntl.h>
 
-// typedef struct s_hero
-// {
-// 	void	*img_ptr[8];
-// 	int		pos_x;
-// 	int		pos_y;
-// 	char	wach;
-// 	char	type;
-// 	char	block_on;
-// }				t_hero;
-
-// typedef struct s_img
-// {
-// 	void	*img_ptr[8];
-// 	int		pos_x;
-// 	int		pos_y;
-// 	char	type;
-// 	char	**wach;
-// 	char	**block_on;
-// }				t_img;
-
 typedef struct s_map
 {
+	int		x_pos;
+	int		y_pos;
 	char	type;
 	char	watch;
 	char	block_on;
-	//char	frame;
+	int		frame;
 }				t_map;
 
 typedef struct s_textures
@@ -53,9 +35,11 @@ typedef struct s_textures
 	void	*floor_img;
 	void	*wall_img;
 	void	*exit_img;
+	void	*score_img;
 	void	*hero_img[8];
 	void	*potion_img[8];
 	void	*enemy_img[8];
+	void	*numbers_img[10];
 }				t_textures;
 
 typedef struct s_mlx_data
@@ -74,6 +58,7 @@ typedef struct s_mlx_data
 	int			y_pos;
 	t_map		**map;
 	t_textures	img;
+	int			seed;
 	int			state;
 	int			score;
 }				t_mlx_data;
@@ -94,6 +79,7 @@ int		all_collected(t_map **map, char c);
 char	**tab_join_free(char **tab, char *line);
 char	**tab_cpy(char **tab);
 void	*create_img(t_mlx_data *data, void *p, char *path);
+int		size_number(unsigned int n);
 
 /*---init_data.c---*/
 void	init_hero(t_mlx_data *data);
@@ -111,15 +97,17 @@ char	**read_tab(int fd);
 char	**create_tab_map(char *filename);
 int		set_map(t_mlx_data *data, char **map);
 void	create_map(t_mlx_data *data, char *filename);
-void	set_pos_img(t_mlx_data *data);
 
 /*---change_map.c---*/
-void	set_new_position(t_mlx_data *data, int move_x, int move_y);
-void	move_hero(t_mlx_data *data, int move_x, int move_y);
+void	set_move(t_mlx_data *data, t_map *old_bloc, int *move_x, int *move_y);
+void	move(t_mlx_data *data, t_map *old_bloc, int move_x, int move_y);
+void	ia_monster(t_mlx_data *data, int *x_move, int *y_move);
+ void	update_monster_position(t_mlx_data *data);
 
 /*---print_map---*/
 void	print_anim(t_mlx_data *data, int x_count, int y_count, void **anim);
 void	print_img(t_mlx_data *data, int x_count, int y_count);
+void	print_score(t_mlx_data *data, int x, int y);
 int		print_map(t_mlx_data *data);
 
 /*---cleanning.c---*/

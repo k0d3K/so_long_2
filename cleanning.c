@@ -6,7 +6,7 @@
 /*   By: lguerbig <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 15:50:44 by lguerbig          #+#    #+#             */
-/*   Updated: 2024/11/16 10:37:18 by lguerbig         ###   ########.fr       */
+/*   Updated: 2024/11/18 09:41:18 by lguerbig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,9 +66,13 @@ void	clear_data(t_mlx_data *data)
 	clear_anim(data, data->img.hero_img);
 	clear_anim(data, data->img.enemy_img);
 	clear_anim(data, data->img.potion_img);
+	clear_anim(data, data->img.numbers_img);
+	mlx_destroy_image(data->mlx_ptr, data->img.numbers_img[8]);
+	mlx_destroy_image(data->mlx_ptr, data->img.numbers_img[9]);
 	mlx_destroy_image(data->mlx_ptr, data->img.floor_img);
 	mlx_destroy_image(data->mlx_ptr, data->img.wall_img);
 	mlx_destroy_image(data->mlx_ptr, data->img.exit_img);
+	mlx_destroy_image(data->mlx_ptr, data->img.score_img);
 	mlx_destroy_window(data->mlx_ptr, data->mlx_win);
 	mlx_destroy_display(data->mlx_ptr);
 	free(data->mlx_ptr);

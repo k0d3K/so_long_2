@@ -6,7 +6,7 @@
 /*   By: lguerbig <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 16:22:38 by lguerbig          #+#    #+#             */
-/*   Updated: 2024/11/16 11:18:53 by lguerbig         ###   ########.fr       */
+/*   Updated: 2024/11/18 10:41:35 by lguerbig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,13 @@ int	handle_input(int keysym, t_mlx_data *data)
 	if (keysym == XK_Escape)
 		close_game_ok(data);
 	if (keysym == XK_Right || keysym == XK_d)
-		move_hero(data, 1, 0);
+		move(data, &data->map[data->y_pos][data->x_pos], 1, 0);
 	if (keysym == XK_Left || keysym == XK_a)
-		move_hero(data, -1, 0);
+		move(data, &data->map[data->y_pos][data->x_pos], -1, 0);
 	if (keysym == XK_Up || keysym == XK_w)
-		move_hero(data, 0, -1);
+		move(data, &data->map[data->y_pos][data->x_pos], 0, -1);
 	if (keysym == XK_Down || keysym == XK_s)
-		move_hero(data, 0, 1);
+		move(data, &data->map[data->y_pos][data->x_pos], 0, 1);
 	return (1);
 }
 
@@ -62,7 +62,6 @@ int	main(int argc, char **argv)
 		close_game_error(&data);
 	init_data(&data);
 	check_img_init(&data);
-	set_pos_img(&data);
 	mlx_key_hook(data.mlx_win, handle_input, &data);
 	mlx_hook(data.mlx_win, 17, 1L << 1, close_game_ok, &data);
 	mlx_loop_hook(data.mlx_ptr, print_map, &data);

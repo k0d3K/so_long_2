@@ -6,7 +6,7 @@
 /*   By: lguerbig <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 11:22:35 by lguerbig          #+#    #+#             */
-/*   Updated: 2024/11/15 19:06:23 by lguerbig         ###   ########.fr       */
+/*   Updated: 2024/11/18 11:05:06 by lguerbig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,22 @@ void	check_enemy_init(t_mlx_data *data, int *error)
 	}
 }
 
+void	check_numbers_init(t_mlx_data *data, int *error)
+{
+	int	i;
+
+	i = 0;
+	while (i < 10)
+	{
+		if (!data->img.enemy_img[i])
+		{
+			ft_printf(2, "Cannot find numbers/%d.xpm\n", i);
+			*error = 1;
+		}
+		i++;
+	}
+}
+
 void	check_img_init(t_mlx_data *data)
 {
 	int	error;
@@ -77,11 +93,14 @@ void	check_img_init(t_mlx_data *data)
 		ft_printf(2, "Cannot find wall.xpm\n");
 	else if (!data->img.exit_img)
 		ft_printf(2, "Cannot find exit.xpm\n");
+	else if (!data->img.score_img)
+		ft_printf(2, "Cannot find exit.xpm\n");
 	else
 		error = 0;
 	check_hero_init(data, &error);
 	check_potion_init(data, &error);
 	check_enemy_init(data, &error);
+	check_numbers_init(data, &error);
 	if (error)
 		close_game_error(data);
 }

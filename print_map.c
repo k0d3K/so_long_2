@@ -6,7 +6,7 @@
 /*   By: lguerbig <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 11:58:19 by lguerbig          #+#    #+#             */
-/*   Updated: 2024/11/16 12:00:47 by lguerbig         ###   ########.fr       */
+/*   Updated: 2024/11/18 12:04:48 by lguerbig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,16 +17,17 @@ void	print_anim(t_mlx_data *data, int x_count, int y_count, void **anim)
 	int		x;
 	int		y;
 	void	*img;
-	int		frame;
+	int		*frame;
 
-	frame = data->state * data->map_width;
-	frame = (frame * (data->map_width + data->map_height)) / (200000) % 4;
+	frame = &data->map[y_count][x_count].frame;
+	*frame += ((data->state * data->map_width * (data->map_width + data->map_height) - 20000 * *frame) / 20000) % 2;
+	*frame %= 4;
 	x = (data->x_begin + x_count) * data->img_width;
 	y = (data->y_begin + y_count) * data->img_height;
 	if (data->map[y_count][x_count].watch == 'L')
-		img = anim[frame];
+		img = anim[*frame];
 	else
-		img = anim[frame + 4];
+		img = anim[*frame + 4];
 	mlx_put_image_to_window(data->mlx_ptr, data->mlx_win, img, x, y);
 }
 
@@ -54,23 +55,51 @@ void	print_img(t_mlx_data *data, int x_count, int y_count)
 	y = (data->y_begin + y_count) * data->img_height;
 	mlx_put_image_to_window(data->mlx_ptr, data->mlx_win, img, x, y);
 }
-	
+
+void	print_score(t_mlx_data *data, int x_count, int y_count)
+{
+	int	x;
+	int	y;
+	int	score;
+
+	x = (data->x_begin + x_count) * data->img_width;
+	y = (data->y_begin + y_count) * data->img_height;
+	mlx_put_image_to_window(data->mlx_ptr, data->mlx_win, data->img.score_img, x, y);
+	x = (data->x_begin + data->map_width - 1) * data->img_width;
+	score = data->score;
+	if (!score)
+		mlx_put_image_to_window(data->mlx_ptr, data->mlx_win, data->img.numbers_img[0], x, y);
+	while (score > 0)
+	{
+		mlx_put_image_to_window(data->mlx_ptr, data->mlx_win, data->img.numbers_img[score % 10], x, y);	
+		score /= 10;
+		x -= data->img_width;
+	}
+}
+
 int	print_map(t_mlx_data *data)
 {
 	int	x_count;
 	int	y_count;
+	int exit;
 	
 	y_count = 0;
+	exit = data->map_width - 4 - size_number(data->score);
+	update_monster_position(data);
 	while (data->map[y_count])
 	{
 		x_count = 0;
 		while (data->map[y_count][x_count].type)
 		{
-			print_img(data, x_count, y_count);
+			if (y_count == data->map_height - 1 && x_count == exit)
+				print_score(data, x_count, y_count);
+			else if (y_count != data->map_height - 1 || x_count < exit)
+				print_img(data, x_count, y_count);
 			x_count++;
 		}
 		y_count++;
 	}
 	data->state++;
+	data->state %= 1000;
 	return (1);
 }

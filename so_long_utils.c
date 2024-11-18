@@ -6,7 +6,7 @@
 /*   By: lguerbig <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 16:26:21 by lguerbig          #+#    #+#             */
-/*   Updated: 2024/11/16 10:26:36 by lguerbig         ###   ########.fr       */
+/*   Updated: 2024/11/18 10:44:18 by lguerbig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,4 +102,19 @@ void	*create_img(t_mlx_data *data, void *p, char *path)
 	h = &data->img_height;
 	img = mlx_xpm_file_to_image(p, path, w, h);
 	return (img);
+}
+
+int	size_number(unsigned int n)
+{
+	int size;
+
+	size = 0;
+	if (n == 0)
+		return (1);
+	while (n > 0)
+	{
+		size++;
+		n /= 10;
+	}
+	return (size);
 }

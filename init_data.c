@@ -6,7 +6,7 @@
 /*   By: lguerbig <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 22:44:23 by lguerbig          #+#    #+#             */
-/*   Updated: 2024/11/16 10:57:40 by lguerbig         ###   ########.fr       */
+/*   Updated: 2024/11/18 11:05:53 by lguerbig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,17 @@ void	init_map(t_mlx_data *data)
 	data->img.floor_img = create_img(data, p, "textures/floor.xpm");
 	data->img.wall_img = create_img(data, p, "textures/wall.xpm");
 	data->img.exit_img = create_img(data, p, "textures/exit.xpm");
+	data->img.score_img = create_img(data, p, "textures/score.xpm");
+	data->img.numbers_img[0] = create_img(data, p, "textures/score/0.xpm");
+	data->img.numbers_img[1] = create_img(data, p, "textures/score/1.xpm");
+	data->img.numbers_img[2] = create_img(data, p, "textures/score/2.xpm");
+	data->img.numbers_img[3] = create_img(data, p, "textures/score/3.xpm");
+	data->img.numbers_img[4] = create_img(data, p, "textures/score/4.xpm");
+	data->img.numbers_img[5] = create_img(data, p, "textures/score/5.xpm");
+	data->img.numbers_img[6] = create_img(data, p, "textures/score/6.xpm");
+	data->img.numbers_img[7] = create_img(data, p, "textures/score/7.xpm");
+	data->img.numbers_img[8] = create_img(data, p, "textures/score/8.xpm");
+	data->img.numbers_img[9] = create_img(data, p, "textures/score/9.xpm");
 }
 
 void	init_data(t_mlx_data *data)
@@ -82,6 +93,7 @@ void	init_data(t_mlx_data *data)
 	y = (data->win_height / data->img_height - data->map_height + 1) / 2;
 	data->x_begin = x;
 	data->y_begin = y;
+	data->seed = 3;
 	data->state = 0;
 	data->score = 0;
 }

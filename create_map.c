@@ -6,7 +6,7 @@
 /*   By: lguerbig <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 10:56:39 by lguerbig          #+#    #+#             */
-/*   Updated: 2024/11/16 11:59:11 by lguerbig         ###   ########.fr       */
+/*   Updated: 2024/11/18 10:25:45 by lguerbig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,26 @@ char	**create_tab_map(char *filename)
 		exit(-1);
 	}
 	free_tab(map_cpy);
-	return (map);
+	map_cpy = tab_cpy(map);
+	free_tab(map);
+	return (map_cpy);
+}
+
+void	set_bloc(t_mlx_data *data, char **map, int i, int j)
+{
+	data->map[j][i].type = map[j][i];
+	data->map[j][i].frame = 0;
+	data->map[j][i].block_on = '0';
+	data->map[j][i].watch = 'L';
+	data->map[j][i].x_pos = i;
+	data->map[j][i].y_pos = j;
+	if (data->map[j][i].type == 'P')
+	{
+		data->x_pos = i;
+		data->y_pos = j;
+	}
+	if (data->map[j][i].type == 'M')
+		data->map[j][i].watch = 'R';
 }
 
 int	set_map(t_mlx_data *data, char **map)
@@ -85,7 +104,7 @@ int	set_map(t_mlx_data *data, char **map)
 			return (0);
 		while (map[j][i] && map[j][i] != '\n')
 		{
-			data->map[j][i].type = map[j][i];
+			set_bloc(data, map, i, j);
 			i++;
 		}
 		data->map[j][i].type = 0;
@@ -119,31 +138,5 @@ void	create_map(t_mlx_data *data, char *filename)
 		free_map(data->map);
 		ft_printf(2, "Error\nThe map is too big to be print on this screen\n");
 		exit(-1);
-	}
-}
-
-void	set_pos_img(t_mlx_data *data)
-{
-	int	x_count;
-	int	y_count;
-
-	y_count = 0;
-	while (data->map[y_count])
-	{
-		x_count = 0;
-		while (data->map[y_count][x_count].type)
-		{
-			data->map[y_count][x_count].block_on = '0';
-			data->map[y_count][x_count].watch = 'L';
-			if (data->map[y_count][x_count].type == 'P')
-			{
-				data->x_pos = x_count;
-				data->y_pos = y_count;
-			}
-			if (data->map[y_count][x_count].type == 'M')
-				data->map[y_count][x_count].watch = 'R';
-			x_count++;
-		}
-		y_count++;
 	}
 }
