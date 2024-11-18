@@ -6,7 +6,7 @@
 /*   By: lguerbig <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 16:58:45 by lguerbig          #+#    #+#             */
-/*   Updated: 2024/11/18 17:38:13 by lguerbig         ###   ########.fr       */
+/*   Updated: 2024/11/18 18:12:24 by lguerbig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ typedef struct s_map
 	int		y_pos;
 	char	type;
 	char	watch;
+	char	moving;
 	char	block_on;
 	int		frame;
 }				t_map;

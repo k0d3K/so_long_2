@@ -6,7 +6,7 @@
 /*   By: lguerbig <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 16:22:38 by lguerbig          #+#    #+#             */
-/*   Updated: 2024/11/18 17:43:21 by lguerbig         ###   ########.fr       */
+/*   Updated: 2024/11/18 18:08:11 by lguerbig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	handle_input(int keysym, t_mlx_data *data)
 	if (keysym == XK_Shift_L)
 		data->dash_on = 1;
 	if (data->dash_on)
-		nb_move = 4;
+		nb_move = 3;
 	else
 		nb_move = 1;
 	if (keysym == XK_Escape)
