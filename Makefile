@@ -5,7 +5,7 @@ LIBFT		=	$(LIBFT_DIR)/libft.a
 MLX_DIR		=	minilibx-linux
 MLX			=	$(MXL_DIR)/libmlx.a
 
-SRC			=	so_long.c parsing.c parsing_path.c so_long_utils.c init_data.c create_map.c print_map.c cleanning.c change_map.c check_init.c
+SRC			=	so_long.c parsing.c parsing_path.c so_long_utils.c init_data.c create_map.c print_map.c cleanning.c change_map.c check_init.c ia_monster.c
 OBJ			=	$(SRC:.c=.o)
 
 # Variables

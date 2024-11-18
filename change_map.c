@@ -6,7 +6,7 @@
 /*   By: lguerbig <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 16:02:57 by lguerbig          #+#    #+#             */
-/*   Updated: 2024/11/18 09:58:13 by lguerbig         ###   ########.fr       */
+/*   Updated: 2024/11/18 14:14:31 by lguerbig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,40 +34,50 @@ void	set_move(t_mlx_data *data, t_map *old_bloc, int *move_x, int *move_y)
 	*move_y = count;
 }
 
+void	move_hero(t_mlx_data *data, t_map *new_bloc)
+{
+	data->x_pos = new_bloc->x_pos;
+	data->y_pos = new_bloc->y_pos;
+	data->score++;
+	ft_printf(1, "%d\n", data->score);
+	if (new_bloc->type == 'M')
+	{
+		ft_printf(1, "Game Over !\n");
+		close_game_ok(data);
+	}
+	if (new_bloc->type == 'E'
+		&& all_collected(data->map, 'C'))
+	{
+		ft_printf(1, "Succes !\n");
+		close_game_ok(data);
+	}
+}
+
+int	move_monster(t_mlx_data *data, t_map *new_bloc)
+{
+	if (new_bloc->type == 'P')
+	{
+		ft_printf(1, "Game Over !\n");
+		close_game_ok(data);
+	}
+	if (new_bloc->type == 'M')
+		return (0);
+	return (1);
+}
+
 void	move(t_mlx_data *data, t_map *old_bloc, int move_x, int move_y)
 {
-	t_map *new_bloc;
+	t_map	*new_bloc;
 
 	set_move(data, old_bloc, &move_x, &move_y);
 	if (!move_x && !move_y)
 		return ;
 	new_bloc = &data->map[old_bloc->y_pos + move_y][old_bloc->x_pos + move_x];
 	if (old_bloc->type == 'P')
-	{
-		data->x_pos = new_bloc->x_pos;
-		data->y_pos = new_bloc->y_pos;
-		data->score++;
-		ft_printf(1, "%d\n", data->score);
-		if (new_bloc->type == 'M')
-		{
-			ft_printf(1, "Game Over !\n");
-			close_game_ok(data);
-		}
-		if (new_bloc->type == 'E'
-			&& all_collected(data->map, 'C'))
-		{
-			ft_printf(1, "Succes !\n");
-			close_game_ok(data);
-		}
-	}
+		move_hero(data, new_bloc);
 	if (old_bloc->type == 'M')
 	{
-		if (new_bloc->type == 'P')
-		{
-			ft_printf(1, "Game Over !\n");
-			close_game_ok(data);
-		}
-		if (new_bloc->type == 'M')
+		if(!move_monster(data, new_bloc))
 			return ;
 	}
 	new_bloc->block_on = new_bloc->type;
@@ -81,54 +91,4 @@ void	move(t_mlx_data *data, t_map *old_bloc, int move_x, int move_y)
 		new_bloc->watch = 'L';
 	else
 		new_bloc->watch = old_bloc->watch;
-}
-
-int generate_move(int *seed)
-{
-	*seed = *seed  * 1664523 + 1013904224;
-	if (*seed % 3 == 0 || *seed % 5 == 0 || *seed % 7 == 0)
-		return (0);
-	return (*seed % 2);
-}
-
-void	ia_monster(t_mlx_data *data, int *x_move, int *y_move)
-{
-	*x_move = generate_move(&data->seed);
-	*y_move = generate_move(&data->seed);
-	if (*x_move != 0)
-		y_move = 0;
-}
-
- void	update_monster_position(t_mlx_data *data)
-{
-	int	x_count;
-	int	y_count;
-	int	x_move;
-	int	y_move;
-	static int	slow;
-
-	y_count = 0;
-	x_count = 0;
-	while (data->map[y_count])
-	{
-		x_count = 0;
-		while (data->map[y_count][x_count].type)
-		{
-			if (data->map[y_count][x_count].type == 'M')
-			{
-				y_move = 0;
-				x_move = 0;
-				if (data->map[y_count][x_count].frame == 0)
-					slow++;
-				if (slow == 50)
-				{
-					ia_monster(data, &x_move, &y_move);
-					move(data, &data->map[y_count][x_count], x_move, y_move);
-					slow = 0;
-				}
-			}
-			x_count++;
-		}
-		y_count++;
-	}
 }

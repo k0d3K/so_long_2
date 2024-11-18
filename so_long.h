@@ -6,7 +6,7 @@
 /*   By: lguerbig <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 16:58:45 by lguerbig          #+#    #+#             */
-/*   Updated: 2024/11/18 10:55:28 by lguerbig         ###   ########.fr       */
+/*   Updated: 2024/11/18 12:49:19 by lguerbig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,15 +100,19 @@ void	create_map(t_mlx_data *data, char *filename);
 
 /*---change_map.c---*/
 void	set_move(t_mlx_data *data, t_map *old_bloc, int *move_x, int *move_y);
+
 void	move(t_mlx_data *data, t_map *old_bloc, int move_x, int move_y);
-void	ia_monster(t_mlx_data *data, int *x_move, int *y_move);
- void	update_monster_position(t_mlx_data *data);
 
 /*---print_map---*/
 void	print_anim(t_mlx_data *data, int x_count, int y_count, void **anim);
 void	print_img(t_mlx_data *data, int x_count, int y_count);
 void	print_score(t_mlx_data *data, int x, int y);
 int		print_map(t_mlx_data *data);
+
+/*---ia_monster---*/
+int		generate_move(int *seed);
+void	ia_monster(t_mlx_data *data, t_map *bloc, int *x_move, int *y_move);
+void	update_monster_position(t_mlx_data *data);
 
 /*---cleanning.c---*/
 int		close_game_error(t_mlx_data *data);
