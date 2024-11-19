@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lguerbig <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: lguerbig <lguerbig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 11:58:19 by lguerbig          #+#    #+#             */
-/*   Updated: 2024/11/18 19:41:22 by lguerbig         ###   ########.fr       */
+/*   Updated: 2024/11/19 13:07:56 by lguerbig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,20 +17,35 @@ void	print_anim(t_mlx_data *data, int x_count, int y_count, void **anim)
 	int		x;
 	int		y;
 	void	*img;
-	int		*frame;
+	void	*img_old;
+	t_map	*bloc;
+	t_map	*bloc_old;
 	int		tmp_frame;
 
-	frame = &data->map[y_count][x_count].frame;
-	tmp_frame = (data->state * (data->map_width + data->map_height));
-	*frame += (tmp_frame * data->map_width - 100000 * *frame) / 100000 % 2;
-	*frame %= 4;
-	x = (data->x_begin + x_count) * data->img_width;
-	y = (data->y_begin + y_count) * data->img_height;
-	if (data->map[y_count][x_count].watch == 'L')
-		img = anim[*frame];
+
+	bloc = &data->map[y_count][x_count];
+	bloc_old = &data->map[y_count + (bloc->y_move > 0) - (bloc->y_move < 0)][x_count + (bloc->x_move > 0) - (bloc->x_move < 0)];
+	if (bloc_old->type == 'E')
+		img_old = data->img.exit_img;
 	else
-		img = anim[*frame + 4];
+	img_old = data->img.floor_img;
+	x = (data->x_begin + bloc_old->x_pos) * data->img_width;
+	y = (data->y_begin + bloc_old->y_pos) * data->img_height;
+	mlx_put_image_to_window(data->mlx_ptr, data->mlx_win, img_old, x , y);
+	tmp_frame = (data->state * (data->map_width + data->map_height));
+	bloc->frame += (tmp_frame * data->map_width - 100000 * bloc->frame) / 100000 % 2;
+	bloc->frame %= 4;
+	x = (data->x_begin + x_count) * data->img_width + bloc->x_move;
+	y = (data->y_begin + y_count) * data->img_height + bloc->y_move;
+	if (bloc->watch == 'L')
+		img = anim[bloc->frame];
+	else
+		img = anim[bloc->frame + 4];
 	mlx_put_image_to_window(data->mlx_ptr, data->mlx_win, img, x, y);
+	if (bloc->x_move)
+		bloc->x_move -= (bloc->x_move > 0) - (bloc->x_move < 0);
+	else if (bloc->y_move)
+		bloc->y_move -= (bloc->y_move > 0) - (bloc->y_move < 0);
 }
 
 void	print_img(t_mlx_data *data, int x_count, int y_count)
@@ -55,7 +70,12 @@ void	print_img(t_mlx_data *data, int x_count, int y_count)
 		return ;
 	x = (data->x_begin + x_count) * data->img_width;
 	y = (data->y_begin + y_count) * data->img_height;
-	mlx_put_image_to_window(data->mlx_ptr, data->mlx_win, img, x, y);
+	if (data->map[y_count][x_count].x_move)
+		data->map[y_count][x_count].x_move -= (data->map[y_count][x_count].x_move > 0) * 1 - (data->map[y_count][x_count].x_move < 0) * 1;
+	else if (data->map[y_count][x_count].y_move)
+		data->map[y_count][x_count].y_move -= (data->map[y_count][x_count].y_move > 0) * 1 - (data->map[y_count][x_count].y_move < 0) * 1;
+	else //if (data->map[y_count][x_count].to_print)
+		mlx_put_image_to_window(data->mlx_ptr, data->mlx_win, img, x, y);
 }
 
 void	print_score(t_mlx_data *data, int x_count, int y_count)
@@ -87,7 +107,6 @@ int	print_map(t_mlx_data *data)
 	
 	y_count = 0;
 	exit = data->map_width - 4 - size_number(data->score);
-	update_monster_position(data);
 	while (data->map[y_count])
 	{
 		x_count = 0;
@@ -101,6 +120,7 @@ int	print_map(t_mlx_data *data)
 		}
 		y_count++;
 	}
+	update_monster_position(data);
 	data->state++;
 	return (1);
 }

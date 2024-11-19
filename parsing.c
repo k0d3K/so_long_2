@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lguerbig <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: lguerbig <lguerbig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 16:22:50 by lguerbig          #+#    #+#             */
-/*   Updated: 2024/11/16 11:20:06 by lguerbig         ###   ########.fr       */
+/*   Updated: 2024/11/19 10:41:28 by lguerbig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int	check_only_one(char **map, char c)
+int	check_only_one(char **map, char c) //problem if no P
 {
 	int	i;
 	int	j;
@@ -116,10 +116,10 @@ int	parsing(char **map)
 	else if (!check_only_one(map, 'P'))
 	{
 		ft_printf(2, "Error\n");
-		ft_printf(2, "There must be only one player's starting position\n");
+		ft_printf(2, "There must be one and only one player's starting position\n");
 	}
 	else if (!check_only_one(map, 'E'))
-		ft_printf(2, "Error\nThere must be only one exit\n");
+		ft_printf(2, "Error\nThere must be one and only one exit\n");
 	else if (!map_is_closed(map))
 		ft_printf(2, "Error\nThere must be closed/surrounded by walls\n");
 	else if (get_nb_collectibles(map) < 1)

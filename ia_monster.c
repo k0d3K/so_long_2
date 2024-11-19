@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ia_monster.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lguerbig <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: lguerbig <lguerbig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 11:22:14 by lguerbig          #+#    #+#             */
-/*   Updated: 2024/11/18 19:51:20 by lguerbig         ###   ########.fr       */
+/*   Updated: 2024/11/19 10:12:00 by lguerbig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int generate_move(int *seed)
 
 void	ia_monster(t_mlx_data *data, t_map *bloc, int *x_move, int *y_move)
 {
-	if (data->state % 200 == 0)
+	if (data->state % 800 == 0)
 	{
 		*x_move = generate_move(&data->seed);
 		*y_move = generate_move(&data->seed);

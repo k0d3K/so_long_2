@@ -33,6 +33,7 @@
 		"__tree": "c",
 		"locale": "c",
 		"ios": "c",
-		"__locale": "c"
+		"__locale": "c",
+		"mlx.h": "c"
 	}
 }

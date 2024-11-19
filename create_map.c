@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_map.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lguerbig <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: lguerbig <lguerbig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 10:56:39 by lguerbig          #+#    #+#             */
-/*   Updated: 2024/11/18 17:45:00 by lguerbig         ###   ########.fr       */
+/*   Updated: 2024/11/19 13:08:00 by lguerbig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,18 +72,21 @@ char	**create_tab_map(char *filename)
 
 void	set_bloc(t_mlx_data *data, char **map, int i, int j)
 {
+	data->map[j][i].to_print = 1;
 	data->map[j][i].type = map[j][i];
 	data->map[j][i].frame = 0;
 	data->map[j][i].block_on = '0';
 	data->map[j][i].watch = 'L';
 	data->map[j][i].x_pos = i;
 	data->map[j][i].y_pos = j;
-	if (data->map[j][i].type == 'P')
+	data->map[j][i].x_move = 0;
+	data->map[j][i].y_move = 0;
+	if (map[j][i] == 'P')
 	{
 		data->x_pos = i;
-		data->y_pos = j;
+		data->y_pos = j; 
 	}
-	if (data->map[j][i].type == 'M')
+	if (map[j][i] == 'M')
 		data->map[j][i].watch = 'R';
 }
 

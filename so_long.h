@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lguerbig <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: lguerbig <lguerbig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 16:58:45 by lguerbig          #+#    #+#             */
-/*   Updated: 2024/11/18 18:12:24 by lguerbig         ###   ########.fr       */
+/*   Updated: 2024/11/19 13:53:14 by lguerbig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,17 @@
 # include <stdlib.h>
 # include <fcntl.h>
 
+# define caca 2
+
 typedef struct s_map
 {
+	int		to_print;
 	int		x_pos;
 	int		y_pos;
 	char	type;
 	char	watch;
-	char	moving;
+	char	x_move;
+	int		y_move;
 	char	block_on;
 	int		frame;
 }				t_map;
