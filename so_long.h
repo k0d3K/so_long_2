@@ -6,7 +6,7 @@
 /*   By: lguerbig <lguerbig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 16:58:45 by lguerbig          #+#    #+#             */
-/*   Updated: 2024/11/20 02:54:27 by lguerbig         ###   ########.fr       */
+/*   Updated: 2024/11/20 19:42:11 by lguerbig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ typedef struct s_textures
 	void	*score_img;
 	void	*hero_img[8];
 	void	*potion_img[8];
-	void	*enemy_img[8];
+	void	*monster_img[8];
 	void	*m_death_l[8];
 	void	*m_death_r[8];
 	void	*numbers_img[10];
@@ -93,7 +93,7 @@ int		check_characters(char **map);
 
 /*---init_data.c---*/
 void	init_hero(t_mlx_data *data);
-void	init_enemy(t_mlx_data *data);
+void	init_monster(t_mlx_data *data);
 void	init_potion(t_mlx_data *data);
 void	init_map(t_mlx_data *data);
 void	init_data(t_mlx_data *data);

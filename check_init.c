@@ -6,7 +6,7 @@
 /*   By: lguerbig <lguerbig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 11:22:35 by lguerbig          #+#    #+#             */
-/*   Updated: 2024/11/19 21:41:27 by lguerbig         ###   ########.fr       */
+/*   Updated: 2024/11/20 19:42:11 by lguerbig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,19 +47,19 @@ void	check_potion_init(t_mlx_data *data, int *error)
 	}
 }
 
-void	check_enemy_init(t_mlx_data *data, int *error)
+void	check_monster_init(t_mlx_data *data, int *error)
 {
 	int	i;
 
 	i = 0;
 	while (i < 8)
 	{
-		if (!data->img.enemy_img[i])
+		if (!data->img.monster_img[i])
 		{
 			if (i < 4)
-				ft_printf(2, "Cannot find enemy/left_%d.xpm\n", i + 1);
+				ft_printf(2, "Cannot find monster/left_%d.xpm\n", i + 1);
 			else
-				ft_printf(2, "Cannot find enemy/right_%d.xpm\n", i - 4 + 1);
+				ft_printf(2, "Cannot find monster/right_%d.xpm\n", i - 4 + 1);
 			*error = 1;
 		}
 		i++;
@@ -73,7 +73,7 @@ void	check_numbers_init(t_mlx_data *data, int *error)
 	i = 0;
 	while (i < 10)
 	{
-		if (!data->img.enemy_img[i])
+		if (!data->img.monster_img[i])
 		{
 			ft_printf(2, "Cannot find numbers/%d.xpm\n", i);
 			*error = 1;
@@ -99,7 +99,7 @@ void	check_img_init(t_mlx_data *data)
 		error = 0;
 	check_hero_init(data, &error);
 	check_potion_init(data, &error);
-	check_enemy_init(data, &error);
+	check_monster_init(data, &error);
 	check_m_death_init(data, &error);
 	check_numbers_init(data, &error);
 	if (error)

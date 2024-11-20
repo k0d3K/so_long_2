@@ -6,7 +6,7 @@
 /*   By: lguerbig <lguerbig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 11:58:19 by lguerbig          #+#    #+#             */
-/*   Updated: 2024/11/20 19:18:48 by lguerbig         ###   ########.fr       */
+/*   Updated: 2024/11/20 19:42:11 by lguerbig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	print_bloc(t_mlx_data *data, int x_count, int y_count)
 	if (bloc->type == 'P')
 		print_anim(data, x_count, y_count, data->img.hero_img);
 	if (bloc->type == 'M')
-		print_anim(data, x_count, y_count, data->img.enemy_img);
+		print_anim(data, x_count, y_count, data->img.monster_img);
 	if (bloc->type == 'D')
 		print_monster_death(data, x_count, y_count);
 	if (bloc->type == 'C')

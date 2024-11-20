@@ -6,7 +6,7 @@
 /*   By: lguerbig <lguerbig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 10:56:39 by lguerbig          #+#    #+#             */
-/*   Updated: 2024/11/20 19:07:00 by lguerbig         ###   ########.fr       */
+/*   Updated: 2024/11/20 19:55:12 by lguerbig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ char	**create_tab_map(char *filename)
 	}
 	map = read_tab(fd);
 	if (!map)
-		exit(-1);
+		return (NULL);
 	close(fd);
 	map_cpy = tab_cpy(map);
 	if (!parsing(map_cpy))
@@ -122,11 +122,12 @@ void	create_map(t_mlx_data *data, char *filename)
 
 	map = create_tab_map(filename);
 	if (!map)
+	{
+		ft_printf(2, "Error\nThe given map is empty\n");
 		exit(-1);
+	}
 	data->map_width = ft_strlen(map[0]);
-	data->map_height = 0;
-	while (map[data->map_height])
-		data->map_height++;
+	data->map_height = size_tab(map);
 	if (!set_map(data, map))
 	{
 		free_tab((void **)map);

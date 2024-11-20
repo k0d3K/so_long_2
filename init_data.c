@@ -6,7 +6,7 @@
 /*   By: lguerbig <lguerbig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 22:44:23 by lguerbig          #+#    #+#             */
-/*   Updated: 2024/11/20 19:16:36 by lguerbig         ###   ########.fr       */
+/*   Updated: 2024/11/20 19:46:20 by lguerbig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,19 +27,19 @@ void	init_hero(t_mlx_data *data)
 	data->img.hero_img[7] = create_img(data, p, "img/hero/right_4.xpm");
 }
 
-void	init_enemy(t_mlx_data *data)
+void	init_monster(t_mlx_data *data)
 {
 	void	*p;
 
 	p = data->mlx_ptr;
-	data->img.enemy_img[0] = create_img(data, p, "img/enemy/left_1.xpm");
-	data->img.enemy_img[1] = create_img(data, p, "img/enemy/left_2.xpm");
-	data->img.enemy_img[2] = create_img(data, p, "img/enemy/left_3.xpm");
-	data->img.enemy_img[3] = create_img(data, p, "img/enemy/left_4.xpm");
-	data->img.enemy_img[4] = create_img(data, p, "img/enemy/right_1.xpm");
-	data->img.enemy_img[5] = create_img(data, p, "img/enemy/right_2.xpm");
-	data->img.enemy_img[6] = create_img(data, p, "img/enemy/right_3.xpm");
-	data->img.enemy_img[7] = create_img(data, p, "img/enemy/right_4.xpm");
+	data->img.monster_img[0] = create_img(data, p, "img/monster/left_1.xpm");
+	data->img.monster_img[1] = create_img(data, p, "img/monster/left_2.xpm");
+	data->img.monster_img[2] = create_img(data, p, "img/monster/left_3.xpm");
+	data->img.monster_img[3] = create_img(data, p, "img/monster/left_4.xpm");
+	data->img.monster_img[4] = create_img(data, p, "img/monster/right_1.xpm");
+	data->img.monster_img[5] = create_img(data, p, "img/monster/right_2.xpm");
+	data->img.monster_img[6] = create_img(data, p, "img/monster/right_3.xpm");
+	data->img.monster_img[7] = create_img(data, p, "img/monster/right_4.xpm");
 }
 
 void	init_potion(t_mlx_data *data)
@@ -86,7 +86,7 @@ void	init_data(t_mlx_data *data)
 	int		y;
 
 	init_hero(data);
-	init_enemy(data);
+	init_monster(data);
 	init_monster_death(data);
 	init_potion(data);
 	init_map(data);

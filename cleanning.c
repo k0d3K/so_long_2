@@ -6,7 +6,7 @@
 /*   By: lguerbig <lguerbig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 15:50:44 by lguerbig          #+#    #+#             */
-/*   Updated: 2024/11/20 18:51:27 by lguerbig         ###   ########.fr       */
+/*   Updated: 2024/11/20 19:42:11 by lguerbig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	clear_data(t_mlx_data *data)
 		if (data->mlx_win)
 		{
 			clear_anim(data, data->img.hero_img);
-			clear_anim(data, data->img.enemy_img);
+			clear_anim(data, data->img.monster_img);
 			clear_anim(data, data->img.potion_img);
 			clear_anim(data, data->img.numbers_img);
 			clear_anim(data, data->img.m_death_l);
