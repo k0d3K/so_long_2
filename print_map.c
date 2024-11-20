@@ -6,7 +6,7 @@
 /*   By: lguerbig <lguerbig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 11:58:19 by lguerbig          #+#    #+#             */
-/*   Updated: 2024/11/20 11:51:21 by lguerbig         ###   ########.fr       */
+/*   Updated: 2024/11/20 19:18:48 by lguerbig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,11 +44,11 @@ void	print_score(t_mlx_data *data, int x_count, int y_count)
 	int		score;
 	void	*img;
 
-	x = (data->x_begin + x_count) * data->img_width;
-	y = (data->y_begin + y_count) * data->img_height;
+	x = (data->x_begin + x_count) * data->img_width + 10;
+	y = (data->y_begin + y_count) * data->img_height + 8;
 	img = data->img.score_img;
 	mlx_put_image_to_window(data->mlx_ptr, data->mlx_win, img, x, y);
-	x = (data->x_begin + data->map_width - 1) * data->img_width;
+	x = (data->x_begin + data->map_width - 1) * data->img_width + 10;
 	score = data->score;
 	img = data->img.numbers_img[0];
 	if (!score)

@@ -6,7 +6,7 @@
 /*   By: lguerbig <lguerbig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 16:02:57 by lguerbig          #+#    #+#             */
-/*   Updated: 2024/11/20 02:22:52 by lguerbig         ###   ########.fr       */
+/*   Updated: 2024/11/20 18:09:14 by lguerbig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,11 @@ void	move(t_mlx_data *data, t_map *old_bloc, int move_x, int move_y)
 	if (new_bloc->type == 'C' && old_bloc->type == 'P')
 		new_bloc->last_type = '0';
 	if (new_bloc->type == 'D' && old_bloc->type == 'P')
+	{
 		new_bloc->last_type = '0';
+		data->score -= 5;
+		data->score = (data->score > 0) * data->score;
+	}
 	new_bloc->type = old_bloc->type;
 	old_bloc->type = old_bloc->last_type;
 	set_transition(new_bloc, old_bloc, move_x, move_y);

@@ -6,7 +6,7 @@
 /*   By: lguerbig <lguerbig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 16:22:38 by lguerbig          #+#    #+#             */
-/*   Updated: 2024/11/20 11:51:15 by lguerbig         ###   ########.fr       */
+/*   Updated: 2024/11/20 19:14:43 by lguerbig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	pre_parsing(int argc, char **argv)
 
 	if (argc != 2)
 	{
-		ft_printf(2, "Error\nThe program need only and only one argument\n");
+		ft_printf(2, "Error\nThe program needs only and only one argument\n");
 		exit(-1);
 	}
 	i = ft_strlen(argv[1]) - 1;
@@ -56,7 +56,7 @@ void	pre_parsing(int argc, char **argv)
 		|| argv[1][i - 2] != 'b' || argv[1][i - 3] != '.')
 	{
 		ft_printf(2, "Error\n");
-		ft_printf(2, "The program need as an argument a .ber format map\n");
+		ft_printf(2, "The program needs as an argument a .ber format map\n");
 		exit(-1);
 	}
 }
@@ -71,8 +71,8 @@ int	main(int argc, char **argv)
 	if (!data.mlx_ptr)
 		close_game_error(&data);
 	data.win_width = 1920;
-	data.win_height = 1080;
-	data.mlx_win = mlx_new_window(data.mlx_ptr, 1920, 1080, "so_long");
+	data.win_height = 1015;
+	data.mlx_win = mlx_new_window(data.mlx_ptr, 1920, 1015, "so_long");
 	if (!data.mlx_win)
 		close_game_error(&data);
 	init_data(&data);
