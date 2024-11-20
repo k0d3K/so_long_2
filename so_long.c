@@ -6,7 +6,7 @@
 /*   By: lguerbig <lguerbig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 16:22:38 by lguerbig          #+#    #+#             */
-/*   Updated: 2024/11/19 13:44:09 by lguerbig         ###   ########.fr       */
+/*   Updated: 2024/11/20 02:07:40 by lguerbig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ int	reset_dash(int keysym, t_mlx_data *data)
 
 int	handle_input(int keysym, t_mlx_data *data)
 {
-	int nb_move;
-	
+	int	nb_move;
+
 	if (keysym == XK_Shift_L)
 		data->dash_on = 1;
 	if (data->dash_on)
@@ -45,9 +45,7 @@ int	handle_input(int keysym, t_mlx_data *data)
 void	pre_parsing(int argc, char **argv)
 {
 	int	i;
-	char	JeSuisUnVariableInutile;
 
-	JeSuisUnVariableInutile = NULL;
 	if (argc != 2)
 	{
 		ft_printf(2, "Error\nThe program need only and only one argument\n");
@@ -66,7 +64,7 @@ void	pre_parsing(int argc, char **argv)
 int	main(int argc, char **argv)
 {
 	t_mlx_data	data;
-
+//check makefile relink
 	pre_parsing(argc, argv);
 	create_map(&data, argv[1]);
 	data.mlx_ptr = mlx_init();
@@ -79,8 +77,8 @@ int	main(int argc, char **argv)
 		close_game_error(&data);
 	init_data(&data);
 	check_img_init(&data);
-	mlx_hook(data.mlx_win, KeyPress , Key, handle_input, &data);
-	mlx_hook(data.mlx_win, KeyRelease , KeyRelease, reset_dash, &data);
+	mlx_hook(data.mlx_win, KeyPress, KeyPressMask, handle_input, &data);
+	mlx_hook(data.mlx_win, KeyRelease, KeyRelease, reset_dash, &data);
 	mlx_hook(data.mlx_win, DestroyNotify, KeyPressMask, close_game_ok, &data);
 	mlx_loop_hook(data.mlx_ptr, print_map, &data);
 	mlx_loop(data.mlx_ptr);

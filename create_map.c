@@ -6,7 +6,7 @@
 /*   By: lguerbig <lguerbig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 10:56:39 by lguerbig          #+#    #+#             */
-/*   Updated: 2024/11/19 13:08:00 by lguerbig         ###   ########.fr       */
+/*   Updated: 2024/11/20 02:01:53 by lguerbig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,11 +72,10 @@ char	**create_tab_map(char *filename)
 
 void	set_bloc(t_mlx_data *data, char **map, int i, int j)
 {
-	data->map[j][i].to_print = 1;
 	data->map[j][i].type = map[j][i];
 	data->map[j][i].frame = 0;
-	data->map[j][i].block_on = '0';
-	data->map[j][i].watch = 'L';
+	data->map[j][i].last_type = '0';
+	data->map[j][i].side = 'L';
 	data->map[j][i].x_pos = i;
 	data->map[j][i].y_pos = j;
 	data->map[j][i].x_move = 0;
@@ -84,10 +83,10 @@ void	set_bloc(t_mlx_data *data, char **map, int i, int j)
 	if (map[j][i] == 'P')
 	{
 		data->x_pos = i;
-		data->y_pos = j; 
+		data->y_pos = j;
 	}
 	if (map[j][i] == 'M')
-		data->map[j][i].watch = 'R';
+		data->map[j][i].side = 'R';
 }
 
 int	set_map(t_mlx_data *data, char **map)
@@ -95,7 +94,7 @@ int	set_map(t_mlx_data *data, char **map)
 	int	i;
 	int	j;
 
-	data->map = (t_map **)malloc(sizeof(t_map*) * (data->map_height + 1));
+	data->map = (t_map **)malloc(sizeof(t_map *) * (data->map_height + 1));
 	if (!data->map)
 		return (0);
 	j = 0;

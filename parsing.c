@@ -6,7 +6,7 @@
 /*   By: lguerbig <lguerbig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 16:22:50 by lguerbig          #+#    #+#             */
-/*   Updated: 2024/11/19 10:41:28 by lguerbig         ###   ########.fr       */
+/*   Updated: 2024/11/20 02:15:32 by lguerbig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,10 +114,7 @@ int	parsing(char **map)
 	if (!map_is_rectangular(map))
 		ft_printf(2, "Error\nThe map must be rectangular\n");
 	else if (!check_only_one(map, 'P'))
-	{
-		ft_printf(2, "Error\n");
-		ft_printf(2, "There must be one and only one player's starting position\n");
-	}
+		ft_printf(2, "Error\nThere must be one and only one player\n");
 	else if (!check_only_one(map, 'E'))
 		ft_printf(2, "Error\nThere must be one and only one exit\n");
 	else if (!map_is_closed(map))
@@ -126,7 +123,9 @@ int	parsing(char **map)
 		ft_printf(2, "Error\nThere must be at least one collectible\n");
 	else if (!check_valid_path(map, i, j))
 		ft_printf(2, "Error\nThere is no valid path in the map\n");
-	else // check only good char
+	else if (!check_characters(map))
+		ft_printf(2, "Error\nThere is an invalid character in the map\n");
+	else
 		return (1);
 	return (0);
 }

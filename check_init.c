@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_init.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lguerbig <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: lguerbig <lguerbig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 11:22:35 by lguerbig          #+#    #+#             */
-/*   Updated: 2024/11/18 12:39:22 by lguerbig         ###   ########.fr       */
+/*   Updated: 2024/11/19 21:41:27 by lguerbig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,7 @@ void	check_img_init(t_mlx_data *data)
 	check_hero_init(data, &error);
 	check_potion_init(data, &error);
 	check_enemy_init(data, &error);
+	check_m_death_init(data, &error);
 	check_numbers_init(data, &error);
 	if (error)
 		close_game_error(data);
