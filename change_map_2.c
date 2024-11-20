@@ -6,7 +6,7 @@
 /*   By: lguerbig <lguerbig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 23:24:37 by lguerbig          #+#    #+#             */
-/*   Updated: 2024/11/20 02:46:56 by lguerbig         ###   ########.fr       */
+/*   Updated: 2024/11/20 10:06:38 by lguerbig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	kill(t_map *bloc, int count)
 {
 	bloc->type = 'D';
-	bloc->frame = - count; // a revoir
+	bloc->frame = -count;
 }
 
 void	set_move_x(t_mlx_data *data, t_map *bloc, int *move_x)

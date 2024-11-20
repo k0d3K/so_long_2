@@ -31,9 +31,12 @@ $(LIBFT)	:
 			make -C $(LIBFT_DIR) --no-print-directory --silent
 			echo "$(Purple)👷------ libft built ------👷$(Color_Off)"
 
-$(NAME)		:	$(MLX) $(LIBFT) $(OBJ)
-			cc $(FLAGS) $(OBJ) $(LIBFT) -Lminilibx-linux -lmlx -lX11 -lXext -o $(NAME)
-			echo "$(Green)✅️----- $(NAME) ready -----✅️$(Color_Off)"
+$(NAME)		:	$(LIBFT) $(OBJ)
+			if [ ! -f minilibx-linux/libmlx.a ];\
+			then $(MAKE) $(MLX) --no-print-directory;\
+			fi
+			cc $(FLAGS) $(OBJ) $(LIBFT) -Lminilibx-linux -lmlx -lX11 -lXext -o $(NAME);\
+			echo "$(Green)✅️----- $(NAME) ready -----✅️$(Color_Off)";\
 
 .c.o		:
 			cc $(FLAGS) -c $< -o $@

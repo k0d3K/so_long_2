@@ -6,7 +6,7 @@
 /*   By: lguerbig <lguerbig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 16:22:38 by lguerbig          #+#    #+#             */
-/*   Updated: 2024/11/20 02:07:40 by lguerbig         ###   ########.fr       */
+/*   Updated: 2024/11/20 11:51:15 by lguerbig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void	pre_parsing(int argc, char **argv)
 int	main(int argc, char **argv)
 {
 	t_mlx_data	data;
-//check makefile relink
+
 	pre_parsing(argc, argv);
 	create_map(&data, argv[1]);
 	data.mlx_ptr = mlx_init();

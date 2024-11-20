@@ -6,7 +6,7 @@
 /*   By: lguerbig <lguerbig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 00:24:02 by lguerbig          #+#    #+#             */
-/*   Updated: 2024/11/20 02:58:25 by lguerbig         ###   ########.fr       */
+/*   Updated: 2024/11/20 11:11:19 by lguerbig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,10 @@ void	print_anim(t_mlx_data *data, int x_count, int y_count, void **anim)
 	tmp = (data->state * (data->map_width + data->map_height));
 	bloc->frame += (tmp * data->map_width - 100000 * bloc->frame) / 100000 % 2;
 	bloc->frame %= 4;
-	x = (data->x_begin + x_count) * data->img_width + bloc->x_move * (bloc->type != 'C');
-	y = (data->y_begin + y_count) * data->img_height + bloc->y_move * (bloc->type != 'C');
+	x = (data->x_begin + x_count);
+	x = x * data->img_width + bloc->x_move * (bloc->type != 'C');
+	y = (data->y_begin + y_count);
+	y = y * data->img_height + bloc->y_move * (bloc->type != 'C');
 	if (bloc->side == 'L')
 		img = anim[bloc->frame];
 	else
