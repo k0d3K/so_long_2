@@ -6,7 +6,7 @@
 /*   By: lguerbig <lguerbig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 15:50:44 by lguerbig          #+#    #+#             */
-/*   Updated: 2024/11/20 19:42:11 by lguerbig         ###   ########.fr       */
+/*   Updated: 2024/11/21 13:21:22 by lguerbig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,17 +34,23 @@ void	free_tab(void **tab)
 	free(tab);
 }
 
-void	clear_anim(t_mlx_data *data, void **img)
+void	clear_img(t_mlx_data *data, void **img, int anim)
 {
 	int	i;
 
 	i = 0;
-	while (i < 8)
+	if (anim)
 	{
-		if (img[i])
-			mlx_destroy_image(data->mlx_ptr, img[i]);
-		i++;
+		while (i < 8)
+		{
+			if (img[i])
+				mlx_destroy_image(data->mlx_ptr, img[i]);
+			i++;
+		}
 	}
+	else
+		if (*img)
+			mlx_destroy_image(data->mlx_ptr, *img);
 }
 
 void	clear_data(t_mlx_data *data)
@@ -55,23 +61,21 @@ void	clear_data(t_mlx_data *data)
 		free_tab((void **)data->map);
 	if (data->mlx_ptr)
 	{
+		clear_img(data, data->img.hero_img, 1);
+		clear_img(data, data->img.monster_img, 1);
+		clear_img(data, data->img.potion_img, 1);
+		clear_img(data, data->img.m_death_l, 1);
+		clear_img(data, data->img.m_death_r, 1);
+		clear_img(data, data->img.numbers_img, 1);
+		clear_img(data, &data->img.numbers_img[8], 0);
+		clear_img(data, &data->img.numbers_img[9], 0);
+		clear_img(data, &data->img.floor_img, 0);
+		clear_img(data, &data->img.wall_img, 0);
+		clear_img(data, &data->img.exit_img, 0);
+		clear_img(data, &data->img.score_img, 0);
 		if (data->mlx_win)
-		{
-			clear_anim(data, data->img.hero_img);
-			clear_anim(data, data->img.monster_img);
-			clear_anim(data, data->img.potion_img);
-			clear_anim(data, data->img.numbers_img);
-			clear_anim(data, data->img.m_death_l);
-			clear_anim(data, data->img.m_death_r);
-			mlx_destroy_image(data->mlx_ptr, data->img.numbers_img[8]);
-			mlx_destroy_image(data->mlx_ptr, data->img.numbers_img[9]);
-			mlx_destroy_image(data->mlx_ptr, data->img.floor_img);
-			mlx_destroy_image(data->mlx_ptr, data->img.wall_img);
-			mlx_destroy_image(data->mlx_ptr, data->img.exit_img);
-			mlx_destroy_image(data->mlx_ptr, data->img.score_img);
 			mlx_destroy_window(data->mlx_ptr, data->mlx_win);
-			mlx_destroy_display(data->mlx_ptr);
-		}
+		mlx_destroy_display(data->mlx_ptr);
 		free(data->mlx_ptr);
 	}
 }

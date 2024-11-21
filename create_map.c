@@ -6,7 +6,7 @@
 /*   By: lguerbig <lguerbig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 10:56:39 by lguerbig          #+#    #+#             */
-/*   Updated: 2024/11/20 19:55:12 by lguerbig         ###   ########.fr       */
+/*   Updated: 2024/11/21 12:18:31 by lguerbig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ char	**create_tab_map(char *filename)
 	return (map_cpy);
 }
 
-void	set_bloc(t_mlx_data *data, char **map, int i, int j)
+void	set_tile(t_mlx_data *data, char **map, int i, int j)
 {
 	data->map[j][i].type = map[j][i];
 	data->map[j][i].frame = 0;
@@ -106,7 +106,7 @@ int	set_map(t_mlx_data *data, char **map)
 			return (0);
 		while (map[j][i] && map[j][i] != '\n')
 		{
-			set_bloc(data, map, i, j);
+			set_tile(data, map, i, j);
 			i++;
 		}
 		data->map[j][i].type = 0;

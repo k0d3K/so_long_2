@@ -6,7 +6,7 @@
 /*   By: lguerbig <lguerbig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 22:44:23 by lguerbig          #+#    #+#             */
-/*   Updated: 2024/11/20 19:46:20 by lguerbig         ###   ########.fr       */
+/*   Updated: 2024/11/21 12:44:57 by lguerbig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,4 +98,5 @@ void	init_data(t_mlx_data *data)
 	data->state = 0;
 	data->score = 0;
 	data->dash_on = 0;
+	data->mlx_win = NULL;
 }

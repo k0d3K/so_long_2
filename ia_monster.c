@@ -6,7 +6,7 @@
 /*   By: lguerbig <lguerbig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 11:22:14 by lguerbig          #+#    #+#             */
-/*   Updated: 2024/11/19 23:39:09 by lguerbig         ###   ########.fr       */
+/*   Updated: 2024/11/21 12:18:31 by lguerbig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,16 +24,16 @@ void	ia_monster(t_mlx_data *data, int *x_count, int *y_count)
 {
 	int		x_move;
 	int		y_move;
-	t_map	*bloc;
+	t_map	*tile;
 
 	if (data->state % 800 == 0)
 	{
-		bloc = &data->map[*y_count][*x_count];
+		tile = &data->map[*y_count][*x_count];
 		x_move = generate_move(&data->seed);
 		y_move = generate_move(&data->seed);
 		if (x_move != 0)
 			y_move = 0;
-		move(data, bloc, x_move, y_move);
+		move(data, tile, x_move, y_move);
 		if (x_move > 0)
 			*x_count += x_move;
 		else if (y_move > 0)

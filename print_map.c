@@ -6,35 +6,35 @@
 /*   By: lguerbig <lguerbig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 11:58:19 by lguerbig          #+#    #+#             */
-/*   Updated: 2024/11/20 19:42:11 by lguerbig         ###   ########.fr       */
+/*   Updated: 2024/11/21 13:01:05 by lguerbig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	print_bloc(t_mlx_data *data, int x_count, int y_count)
+void	print_tile(t_mlx_data *data, int x_count, int y_count)
 {
 	void	*img;
-	t_map	*bloc;
+	t_map	*tile;
 
-	bloc = &data->map[y_count][x_count];
-	if (bloc->type == 'P')
+	tile = &data->map[y_count][x_count];
+	if (tile->type == 'P')
 		print_anim(data, x_count, y_count, data->img.hero_img);
-	if (bloc->type == 'M')
+	if (tile->type == 'M')
 		print_anim(data, x_count, y_count, data->img.monster_img);
-	if (bloc->type == 'D')
+	if (tile->type == 'D')
 		print_monster_death(data, x_count, y_count);
-	if (bloc->type == 'C')
+	if (tile->type == 'C')
 		print_anim(data, x_count, y_count, data->img.potion_img);
-	if (bloc->type == 'E')
+	if (tile->type == 'E')
 		img = data->img.exit_img;
-	else if (bloc->type == '1')
+	else if (tile->type == '1')
 		img = data->img.wall_img;
-	else if (bloc->type == '0')
+	else if (tile->type == '0')
 		img = data->img.floor_img;
 	else
 		return ;
-	print_img(data, img, bloc);
+	print_img(data, img, tile);
 }
 
 void	print_score(t_mlx_data *data, int x_count, int y_count)
@@ -78,7 +78,7 @@ int	print_map(t_mlx_data *data)
 			if (y_count == data->map_height - 1 && x_count == exit)
 				print_score(data, x_count, y_count);
 			else if (y_count != data->map_height - 1 || x_count < exit)
-				print_bloc(data, x_count, y_count);
+				print_tile(data, x_count, y_count);
 			x_count++;
 		}
 		y_count++;

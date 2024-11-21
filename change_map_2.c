@@ -6,90 +6,90 @@
 /*   By: lguerbig <lguerbig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 23:24:37 by lguerbig          #+#    #+#             */
-/*   Updated: 2024/11/20 17:42:59 by lguerbig         ###   ########.fr       */
+/*   Updated: 2024/11/21 13:16:45 by lguerbig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	kill(t_map *bloc, int count)
+void	kill(t_map *tile)
 {
-	bloc->type = 'D';
-	bloc->frame = -count;
+	tile->type = 'D';
+	tile->frame = 0;
 }
 
-void	set_move_x(t_mlx_data *data, t_map *bloc, int *move_x)
+void	set_move_x(t_mlx_data *data, t_map *tile, int *move_x)
 {
 	int	count;
 
 	count = 0;
 	while (count < *move_x
-		&& data->map[bloc->y_pos][bloc->x_pos + count + 1].type != '1')
+		&& data->map[tile->y_pos][tile->x_pos + count + 1].type != '1')
 	{
-		if (data->map[bloc->y_pos][bloc->x_pos + count + 1].type == 'M'
+		if (data->map[tile->y_pos][tile->x_pos + count + 1].type == 'M'
 			&& *move_x > 1)
-			kill(&data->map[bloc->y_pos][bloc->x_pos + count + 1], count);
+			kill(&data->map[tile->y_pos][tile->x_pos + count + 1]);
 		count++;
 	}
 	while (count > *move_x
-		&& data->map[bloc->y_pos][bloc->x_pos + count - 1].type != '1')
+		&& data->map[tile->y_pos][tile->x_pos + count - 1].type != '1')
 	{
-		if (data->map[bloc->y_pos][bloc->x_pos + count - 1].type == 'M'
+		if (data->map[tile->y_pos][tile->x_pos + count - 1].type == 'M'
 			&& *move_x < -1)
-			kill(&data->map[bloc->y_pos][bloc->x_pos + count - 1], count);
+			kill(&data->map[tile->y_pos][tile->x_pos + count - 1]);
 		count--;
 	}
 	*move_x = count;
 }
 
-void	set_move_y(t_mlx_data *data, t_map *bloc, int *move_y)
+void	set_move_y(t_mlx_data *data, t_map *tile, int *move_y)
 {
 	int	count;
 
 	count = 0;
 	while (count < *move_y
-		&& data->map[bloc->y_pos + count + 1][bloc->x_pos].type != '1')
+		&& data->map[tile->y_pos + count + 1][tile->x_pos].type != '1')
 	{
-		if (data->map[bloc->y_pos + count + 1][bloc->x_pos].type == 'M'
+		if (data->map[tile->y_pos + count + 1][tile->x_pos].type == 'M'
 			&& *move_y > 1)
-			kill(&data->map[bloc->y_pos + count + 1][bloc->x_pos], count);
+			kill(&data->map[tile->y_pos + count + 1][tile->x_pos]);
 		count++;
 	}
 	while (count > *move_y
-		&& data->map[bloc->y_pos + count - 1][bloc->x_pos].type != '1')
+		&& data->map[tile->y_pos + count - 1][tile->x_pos].type != '1')
 	{
-		if (data->map[bloc->y_pos + count - 1][bloc->x_pos].type == 'M'
+		if (data->map[tile->y_pos + count - 1][tile->x_pos].type == 'M'
 			&& *move_y < -1)
-			kill(&data->map[bloc->y_pos + count - 1][bloc->x_pos], count);
+			kill(&data->map[tile->y_pos + count - 1][tile->x_pos]);
 		count--;
 	}
 	*move_y = count;
 }
 
-void	set_transition(t_map *new_bloc, t_map *old_bloc, int x, int y)
+void	set_transition(t_map *new_tile, t_map *old_tile, int x, int y)
 {
 	if (y > 0)
 	{
-		new_bloc->y_move += -50;
-		old_bloc->y_move += -50;
+		new_tile->y_move += -50;
+		old_tile->y_move += -50;
 	}
 	else if (y < 0)
 	{
-		new_bloc->y_move += 50;
-		old_bloc->y_move += 50;
+		new_tile->y_move += 50;
+		old_tile->y_move += 50;
 	}
 	if (x > 0)
 	{
-		new_bloc->x_move += -50;
-		old_bloc->x_move += -50;
-		new_bloc->side = 'R';
+		new_tile->x_move += -50;
+		old_tile->x_move += -50;
+		new_tile->side = 'R';
 	}
 	else if (x < 0)
 	{
-		new_bloc->x_move += 50;
-		old_bloc->x_move += 50;
-		new_bloc->side = 'L';
+		new_tile->x_move += 50;
+		old_tile->x_move += 50;
+		new_tile->side = 'L';
 	}
 	else
-		new_bloc->side = old_bloc->side;
+		new_tile->side = old_tile->side;
 }

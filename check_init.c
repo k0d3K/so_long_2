@@ -6,7 +6,7 @@
 /*   By: lguerbig <lguerbig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 11:22:35 by lguerbig          #+#    #+#             */
-/*   Updated: 2024/11/20 19:42:11 by lguerbig         ###   ########.fr       */
+/*   Updated: 2024/11/21 13:17:29 by lguerbig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,17 +86,8 @@ void	check_img_init(t_mlx_data *data)
 {
 	int	error;
 
-	error = 1;
-	if (!data->img.floor_img)
-		ft_printf(2, "Cannot find floor.xpm\n");
-	else if (!data->img.wall_img)
-		ft_printf(2, "Cannot find wall.xpm\n");
-	else if (!data->img.exit_img)
-		ft_printf(2, "Cannot find exit.xpm\n");
-	else if (!data->img.score_img)
-		ft_printf(2, "Cannot find exit.xpm\n");
-	else
-		error = 0;
+	error = 0;
+	check_map_init(data, &error);
 	check_hero_init(data, &error);
 	check_potion_init(data, &error);
 	check_monster_init(data, &error);

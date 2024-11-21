@@ -6,7 +6,7 @@
 /*   By: lguerbig <lguerbig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 16:22:38 by lguerbig          #+#    #+#             */
-/*   Updated: 2024/11/20 19:45:46 by lguerbig         ###   ########.fr       */
+/*   Updated: 2024/11/21 12:47:08 by lguerbig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	pre_parsing(int argc, char **argv)
 
 	if (argc != 2)
 	{
-		ft_printf(2, "Error\nThe program needs only and only one argument\n");
+		ft_printf(2, "Error\nThe program needs one and only one argument\n");
 		exit(-1);
 	}
 	i = ft_strlen(argv[1]) - 1;
@@ -72,11 +72,11 @@ int	main(int argc, char **argv)
 		close_game_error(&data);
 	data.win_width = 1920;
 	data.win_height = 1015;
+	init_data(&data);
+	check_img_init(&data);
 	data.mlx_win = mlx_new_window(data.mlx_ptr, 1920, 1015, "so_long");
 	if (!data.mlx_win)
 		close_game_error(&data);
-	init_data(&data);
-	check_img_init(&data);
 	mlx_hook(data.mlx_win, KeyPress, KeyPressMask, handle_input, &data);
 	mlx_hook(data.mlx_win, KeyRelease, KeyRelease, reset_dash, &data);
 	mlx_hook(data.mlx_win, DestroyNotify, KeyPressMask, close_game_ok, &data);

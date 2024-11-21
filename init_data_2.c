@@ -6,7 +6,7 @@
 /*   By: lguerbig <lguerbig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 20:22:00 by lguerbig          #+#    #+#             */
-/*   Updated: 2024/11/19 21:43:48 by lguerbig         ###   ########.fr       */
+/*   Updated: 2024/11/21 12:32:23 by lguerbig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,4 +33,16 @@ void	init_monster_death(t_mlx_data *data)
 	data->img.m_death_r[5] = create_img(data, p, "img/m_death/right_6.xpm");
 	data->img.m_death_r[6] = create_img(data, p, "img/m_death/right_7.xpm");
 	data->img.m_death_r[7] = create_img(data, p, "img/m_death/right_8.xpm");
+}
+
+void	*create_img(t_mlx_data *data, void *p, char *path)
+{
+	int		*w;
+	int		*h;
+	void	*img;
+
+	w = &data->img_width;
+	h = &data->img_height;
+	img = mlx_xpm_file_to_image(p, path, w, h);
+	return (img);
 }
