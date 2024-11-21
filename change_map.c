@@ -6,7 +6,7 @@
 /*   By: lguerbig <lguerbig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 16:02:57 by lguerbig          #+#    #+#             */
-/*   Updated: 2024/11/21 12:18:31 by lguerbig         ###   ########.fr       */
+/*   Updated: 2024/11/21 17:05:01 by lguerbig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,12 +57,12 @@ void	move(t_mlx_data *data, t_map *old_tile, int move_x, int move_y)
 	if (old_tile->type == 'M')
 		if (!move_monster(data, new_tile))
 			return ;
-	new_tile->last_type = new_tile->type;
+	if (new_tile->type != 'D')
+		new_tile->last_type = new_tile->type;
 	if (new_tile->type == 'C' && old_tile->type == 'P')
 		new_tile->last_type = '0';
 	if (new_tile->type == 'D' && old_tile->type == 'P')
 	{
-		new_tile->last_type = '0';
 		data->score -= 5;
 		data->score = (data->score > 0) * data->score;
 	}

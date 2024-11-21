@@ -1,12 +1,12 @@
 NAME		=	so_long
-FLAGS		=	-Wall -Wextra -Werror -g
+FLAGS		=	-Wall -Wextra -Werror
 LIBFT_DIR	=	libft
 LIBFT		=	$(LIBFT_DIR)/libft.a
 MLX_DIR		=	minilibx-linux
 MLX			=	$(MXL_DIR)/libmlx.a
 
 SRC			=	so_long.c parsing.c parsing_2.c so_long_utils.c init_data.c init_data_2.c check_init.c check_init_2.c	\
-				create_map.c create_map_2.c print_map.c print_map_2.c cleanning.c change_map.c change_map_2.c ia_monster.c
+				create_map.c create_map_2.c print_map.c print_map_2.c cleaning.c change_map.c change_map_2.c ai_monster.c
 OBJ			=	$(SRC:.c=.o)
 
 # Variables

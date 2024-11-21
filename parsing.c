@@ -6,13 +6,13 @@
 /*   By: lguerbig <lguerbig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 16:22:50 by lguerbig          #+#    #+#             */
-/*   Updated: 2024/11/20 02:15:32 by lguerbig         ###   ########.fr       */
+/*   Updated: 2024/11/21 19:14:27 by lguerbig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int	check_only_one(char **map, char c) //problem if no P
+int	check_only_one(char **map, char c)
 {
 	int	i;
 	int	j;
@@ -105,14 +105,12 @@ int	map_is_rectangular(char **map)
 
 int	parsing(char **map)
 {
-	int	i;
-	int	j;
-
 	if (!map)
 		return (0);
-	find_player(map, &i, &j);
 	if (!map_is_rectangular(map))
 		ft_printf(2, "Error\nThe map must be rectangular\n");
+	else if (!check_characters(map))
+		ft_printf(2, "Error\nThere is an invalid character in the map\n");
 	else if (!check_only_one(map, 'P'))
 		ft_printf(2, "Error\nThere must be one and only one player\n");
 	else if (!check_only_one(map, 'E'))
@@ -121,10 +119,8 @@ int	parsing(char **map)
 		ft_printf(2, "Error\nThere must be closed/surrounded by walls\n");
 	else if (get_nb_collectibles(map) < 1)
 		ft_printf(2, "Error\nThere must be at least one collectible\n");
-	else if (!check_valid_path(map, i, j))
+	else if (!flood_fill(map))
 		ft_printf(2, "Error\nThere is no valid path in the map\n");
-	else if (!check_characters(map))
-		ft_printf(2, "Error\nThere is an invalid character in the map\n");
 	else
 		return (1);
 	return (0);

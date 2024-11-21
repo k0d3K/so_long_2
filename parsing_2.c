@@ -6,7 +6,7 @@
 /*   By: lguerbig <lguerbig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 22:31:45 by lguerbig          #+#    #+#             */
-/*   Updated: 2024/11/20 02:19:14 by lguerbig         ###   ########.fr       */
+/*   Updated: 2024/11/21 19:33:00 by lguerbig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,11 @@ int	all_collected_char(char **map, char c)
 	return (1);
 }
 
-void	find_player(char **map, int *x, int *y)
+int	flood_fill(char **map)
 {
-	int	i;
-	int	j;
-
+	int i;
+	int j;
+	
 	j = 0;
 	i = 0;
 	while (map[j][i] != 'P')
@@ -49,8 +49,9 @@ void	find_player(char **map, int *x, int *y)
 			i = 0;
 		}
 	}
-	*x = i;
-	*y = j;
+	if (check_valid_path(map, i, j))
+		return (1);
+	return (0);
 }
 
 int	check_valid_path(char **map, int x, int y)

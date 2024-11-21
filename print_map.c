@@ -6,7 +6,7 @@
 /*   By: lguerbig <lguerbig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 11:58:19 by lguerbig          #+#    #+#             */
-/*   Updated: 2024/11/21 13:01:05 by lguerbig         ###   ########.fr       */
+/*   Updated: 2024/11/21 19:30:54 by lguerbig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,9 +75,11 @@ int	print_map(t_mlx_data *data)
 		x_count = 0;
 		while (data->map[y_count][x_count].type)
 		{
-			if (y_count == data->map_height - 1 && x_count == exit)
+			if (y_count == data->map_height - 1 && x_count == exit
+				&& data->map_width > 4)
 				print_score(data, x_count, y_count);
-			else if (y_count != data->map_height - 1 || x_count < exit)
+			else if (y_count != data->map_height - 1 || x_count < exit
+				|| data->map_width <= 4)
 				print_tile(data, x_count, y_count);
 			x_count++;
 		}

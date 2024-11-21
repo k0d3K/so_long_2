@@ -6,7 +6,7 @@
 /*   By: lguerbig <lguerbig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 16:58:45 by lguerbig          #+#    #+#             */
-/*   Updated: 2024/11/21 13:23:30 by lguerbig         ###   ########.fr       */
+/*   Updated: 2024/11/21 19:32:56 by lguerbig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,8 @@ int		map_is_rectangular(char **map);
 int		parsing(char **map);
 
 /*---parsing_2.c---*/
-void	find_player(char **map, int *x, int *y);
+int		all_collected_char(char **map, char c);
+int		flood_fill(char **map);
 int		check_valid_path(char **map, int x, int y);
 int		check_characters(char **map);
 
@@ -146,9 +147,9 @@ void	print_anim(t_mlx_data *data, int x_count, int y_count, void **anim);
 void	print_monster_death(t_mlx_data *data, int x_count, int y_count);
 void	print_img(t_mlx_data *data, void *img, t_map *tile);
 
-/*---ia_monster---*/
+/*---ai_monster---*/
 int		generate_move(int *seed);
-void	ia_monster(t_mlx_data *data, int *x_count, int *y_count);
+void	ai_monster(t_mlx_data *data, int *x_count, int *y_count);
 void	update_monster_position(t_mlx_data *data);
 
 /*---cleanning.c---*/
